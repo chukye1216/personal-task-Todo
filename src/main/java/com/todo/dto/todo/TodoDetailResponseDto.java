@@ -10,6 +10,7 @@ public class TodoDetailResponseDto {
     private final String username;
     private final String title;
     private final String content;
+    private final Integer commentCount;
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
 
@@ -17,7 +18,7 @@ public class TodoDetailResponseDto {
             Long id,
             String username,
             String title,
-            String content,
+            String content, int commentCount,
             LocalDateTime createdAt,
             LocalDateTime modifiedAt)
     {
@@ -25,6 +26,7 @@ public class TodoDetailResponseDto {
         this.username = username;
         this.title = title;
         this.content = content;
+        this.commentCount = commentCount;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
     }

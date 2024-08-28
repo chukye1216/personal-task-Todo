@@ -4,6 +4,9 @@ import com.todo.Entity.Todo;
 import com.todo.dto.todo.*;
 import com.todo.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,17 +34,33 @@ public class TodoService {
                 savedTodo.getModifiedAt()
         );
     }
-
-    public TodoDetailResponseDto getTodo(Long todoId) {
-        Todo todo = todoRepository.findById(todoId).orElseThrow(()-> new  IllegalArgumentException("할일이 없습니다."));
-        return new  TodoDetailResponseDto(
+    public TodoDetailResponseDto getTodos(Long todoId) {
+        Todo todo = todoRepository.findById(todoId)
+                .orElseThrow(() -> new IllegalArgumentException("할 일이 없습니다."));
+        return new TodoDetailResponseDto(
                 todo.getId(),
                 todo.getUsername(),
                 todo.getTitle(),
                 todo.getContent(),
+                todo.getComments().size(),
                 todo.getCreatedAt(),
                 todo.getModifiedAt()
         );
+    }
+
+    public Page<TodoDetailResponseDto> getTodo(int page, int size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Todo> todos = todoRepository.findAllByOrderByModifiedAtDesc(pageable);
+
+        return todos.map(todo -> new TodoDetailResponseDto(
+                todo.getId(),
+                todo.getUsername(),
+                todo.getTitle(),
+                todo.getContent(),
+                todo.getComments().size(),
+                todo.getCreatedAt(),
+                todo.getModifiedAt()
+        ));
     }
 
     @Transactional
