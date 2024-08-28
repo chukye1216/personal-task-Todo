@@ -1,7 +1,7 @@
 package com.todo.service;
 
 import com.todo.Entity.Todo;
-import com.todo.dto.*;
+import com.todo.dto.todo.*;
 import com.todo.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.todo.controller;
 
-import com.todo.dto.*;
+import com.todo.dto.todo.*;
 import com.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

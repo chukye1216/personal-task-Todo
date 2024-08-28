@@ -1,4 +1,4 @@
-package com.todo.dto;
+package com.todo.dto.todo;
 
 import lombok.Getter;
 
